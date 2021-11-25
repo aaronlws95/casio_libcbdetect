@@ -41,9 +41,11 @@
 #include <opencv2/opencv.hpp>
 
 #include "libcbdetect/config.h"
+#include <libcbdetect/boards_from_corners.h>
+#include <libcbdetect/find_corners.h>
 
 namespace cbdetect {
 
-extern "C" __attribute__((visibility("default"))) void boards_from_corners(const cv::Mat& img, const Corner& corners,
-                                              std::vector<Board>& boards, const Params& params); 
+extern "C" __attribute__((visibility("default"))) void get_boards(const cv::Mat& img, std::vector<std::vector<std::vector<int>>>& boardIdx, std::vector<cv::Point2d>& cornerPoints); 
 }
+
