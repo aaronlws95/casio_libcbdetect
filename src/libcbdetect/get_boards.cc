@@ -8,6 +8,9 @@ void get_boards(const cv::Mat& img, std::vector<std::vector<std::vector<int>>>& 
     Params libcbParams;
     std::vector<Board> libcbBoards;
 
+    boardIdx.clear();
+    cornerPoints.clear();
+
     find_corners(img, libcbCorners, libcbParams);
 
     if (libcbCorners.p.empty())
