@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.14)
 project(Libcbdetect)
+include(FetchContent)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/bin/${CMAKE_BUILD_TYPE})
 set(LIBRARY_OUTPUT_PATH ${PROJECT_SOURCE_DIR}/lib/${CMAKE_BUILD_TYPE})
@@ -28,7 +29,7 @@ else ()
   set(LIB_TYPE STATIC)
 endif ()
 
-find_package(OpenCV REQUIRED)
+find_package(opencv REQUIRED)
 
 set(THIRD_PARTY_INCLUDE_DIRS ${OpenCV_INCLUDE_DIRS})
 set(THIRD_PARTY_LIBS ${OpenCV_LIBS})
@@ -37,3 +38,5 @@ include_directories(${THIRD_PARTY_INCLUDE_DIRS}
 
 add_subdirectory(${PROJECT_SOURCE_DIR}/src)
 add_subdirectory(${PROJECT_SOURCE_DIR}/src/libcbdetect)
+
+install(TARGETS libcbdetect DESTINATION ${CMAKE_INSTALL_PREFIX})
