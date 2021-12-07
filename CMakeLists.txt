@@ -29,6 +29,7 @@ else ()
 endif ()
 
 find_package(OpenCV REQUIRED)
+find_package(opencv)
 
 set(THIRD_PARTY_INCLUDE_DIRS ${OpenCV_INCLUDE_DIRS})
 set(THIRD_PARTY_LIBS ${OpenCV_LIBS})
