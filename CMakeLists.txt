@@ -28,7 +28,7 @@ else ()
   set(LIB_TYPE STATIC)
 endif ()
 
-find_package(opencv)
+find_package(opencv REQUIRED)
 
 set(THIRD_PARTY_INCLUDE_DIRS ${OpenCV_INCLUDE_DIRS})
 set(THIRD_PARTY_LIBS ${OpenCV_LIBS})
