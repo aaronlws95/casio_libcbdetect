@@ -6,6 +6,8 @@ void get_boards(const cv::Mat& img, std::vector<std::vector<std::vector<int>>>& 
 {
     Corner libcbCorners;
     Params libcbParams;
+    libcbParams.show_processing = false;
+    
     std::vector<Board> libcbBoards;
 
     boardIdx.clear();
