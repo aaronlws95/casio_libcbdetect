@@ -129,7 +129,7 @@ void filter_corners(const cv::Mat& img, const cv::Mat& img_angle, const cv::Mat&
       double tmp_maxval = 0;
       cv::minMaxLoc(img_weight_sub, NULL, &tmp_maxval);
       img_weight_sub.forEach<double>([&tmp_maxval](double& val, const int* pos) -> void {
-        val = val < 0.5 * tmp_maxval ? 0 : val;
+        val = val < 0.3 * tmp_maxval ? 0 : val;
       });
 
       // create histogram
