@@ -52,17 +52,17 @@ double corner_correlation_score(const cv::Mat& img, const cv::Mat& img_weight,
   // compute gradient filter kernel (bandwith = 3 px)
   double center      = (img.cols - 1) / 2;
   cv::Mat img_filter = cv::Mat::ones(img.size(), CV_64F) * -1;
+  double filter_threshold = img.cols / 4.0; // This is calculated from the original 5 or 7 radius / 1.5. This value can be tuned to adjust how blurry the image can be
   for(int u = 0; u < img.cols; ++u) {
     for(int v = 0; v < img.rows; ++v) {
       cv::Point2d p1{u - center, v - center};
       cv::Point2d p2{(p1.x * v1.x + p1.y * v1.y) * v1.x, (p1.x * v1.x + p1.y * v1.y) * v1.y};
       cv::Point2d p3{(p1.x * v2.x + p1.y * v2.y) * v2.x, (p1.x * v2.x + p1.y * v2.y) * v2.y};
-      if(cv::norm(p1 - p2) <= 1.5 || cv::norm(p1 - p3) <= 1.5) {
+      if(cv::norm(p1 - p2) <= filter_threshold || cv::norm(p1 - p3) <= filter_threshold) {
         img_filter.at<double>(v, u) = 1;
       }
     }
   }
-
   // normalize
   cv::Scalar mean, std;
   cv::meanStdDev(img_filter, mean, std);

@@ -260,6 +260,10 @@ void refine_corners(const cv::Mat& img_du, const cv::Mat& img_dv, const cv::Mat&
         v[2][0] = eig_tmp2.at<double>(1, 0);
         v[2][1] = eig_tmp2.at<double>(1, 1);
       }
+      
+      if (abs(v[0][0] * v[1][0] + v[0][1] * v[1][1]) >= 0.99) { // filter out the case that two modes are of the same angle after refinement
+        continue;
+      }
 
       std::sort(v.begin(), v.end(), [](const auto& a1, const auto& a2) {
         return a1[0] * a2[1] - a1[1] * a2[0] > 0;
