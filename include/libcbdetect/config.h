@@ -108,7 +108,7 @@ typedef struct Params {
   bool norm;
   bool polynomial_fit;
   int norm_half_kernel_size;
-  int polynomial_fit_half_kernel_size;
+  std::vector<int> polynomial_fit_half_kernel_size;
   double init_loc_thr;
   double score_thr;
   bool strict_grow;
@@ -125,7 +125,7 @@ typedef struct Params {
       , norm(false)
       , polynomial_fit(true)
       , norm_half_kernel_size(31)
-      , polynomial_fit_half_kernel_size(4)
+      , polynomial_fit_half_kernel_size({4, 13})
       , init_loc_thr(0.01)
       , score_thr(0.01)
       , strict_grow(true)
@@ -133,7 +133,7 @@ typedef struct Params {
       , occlusion(true)
       , detect_method(HessianResponse)
       , corner_type(SaddlePoint)
-      , radius({5, 7}) {}
+      , radius({7, 13, 21, 29, 37, 45}) {}
 } Params;
 
 typedef struct Corner {
