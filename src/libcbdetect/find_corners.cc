@@ -39,7 +39,7 @@
 
 namespace cbdetect {
 
-void find_corners_reiszed(const cv::Mat& img, Corner& corners, const Params& params) {
+void find_corners_reiszed(const cv::Mat& img, Corner& corners, Params& params) {
   cv::Mat img_resized, img_norm;
   Corner corners_resized;
 
@@ -107,7 +107,13 @@ void find_corners_reiszed(const cv::Mat& img, Corner& corners, const Params& par
 
   // merge corners
   std::for_each(corners_resized.p.begin(), corners_resized.p.end(), [&scale](auto& p) { p /= scale; });
-  // std::for_each(corners_resized.r.begin(), corners_resized.r.end(), [&scale](auto &r) { r = (double) r / scale; });
+  std::for_each(corners_resized.r.begin(), corners_resized.r.end(), [&scale](auto &r) { r = int((double)r / scale); });
+  size_t r_size = params.radius.size();
+
+  for (size_t i = 0; i < r_size; i++) { // resize params.radius by the same scale and use that instead. Will need to append resized r back to params.radius
+    params.radius.push_back(int((double)params.radius.at(i) / scale));
+  }
+
   double min_dist_thr = scale > 1 ? 3 : 5;
   for(int i = 0; i < corners_resized.p.size(); ++i) {
     double min_dist = DBL_MAX;
@@ -129,7 +135,7 @@ void find_corners_reiszed(const cv::Mat& img, Corner& corners, const Params& par
   }
 }
 
-void find_corners(const cv::Mat& img, Corner& corners, const Params& params) {
+void find_corners(const cv::Mat& img, Corner& corners, Params& params) {
   // clear old data
   corners.p.clear();
   corners.r.clear();

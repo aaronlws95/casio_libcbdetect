@@ -47,7 +47,7 @@
 namespace cbdetect {
 
 extern "C" __attribute__((visibility("default"))) void find_corners(const cv::Mat& img, Corner& corners,
-                                       const Params& params = Params());
+                                       Params& params);
 
 }
 
